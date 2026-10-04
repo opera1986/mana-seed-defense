@@ -196,9 +196,11 @@ export function showHub(scene, tab, ctx, h) {
       const up = layer.add(scene.add.rectangle(W - 150, y, 100, 42, k.upOk ? 0x57e389 : 0x3a3150));
       text(layer, scene, W - 150, y, k.upPrice === null ? '최대' : `+1 ◆${k.upPrice}`, 14, k.upOk ? '#0a0612' : '#8a8199', true);
       if (k.upOk) layer.onTap(up, () => { layer.destroy(); h.onTune(k.id, 1); });
-      const down = layer.add(scene.add.rectangle(W - 55, y, 70, 42, 0xff8787));
-      text(layer, scene, W - 55, y, '스킬 레벨 -1', 10, '#0a0612', true);
-      layer.onTap(down, () => { layer.destroy(); h.onTuneDownRequest(k); });
+      if (k.rank > 0) {
+        const down = layer.add(scene.add.rectangle(W - 55, y, 70, 42, 0xff8787));
+        text(layer, scene, W - 55, y, '스킬 레벨 -1', 10, '#0a0612', true);
+        layer.onTap(down, () => { layer.destroy(); h.onTuneDownRequest(k); });
+      }
     });
   }
   button(layer, scene, 880, '닫기', 0x6fa8ff, h.onClose);
