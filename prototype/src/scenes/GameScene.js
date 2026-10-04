@@ -555,6 +555,7 @@ export class GameScene extends Phaser.Scene {
 
   openHub(tab = 'maintain', notice = null) {
     if (this.paused || this.run.state !== 'prep') return;
+    if (this.overlay && !this.overlay.destroyed) this.overlay.destroy();
     this.pause();
     this.hubTab = tab;
     this.overlay = showHub(this, tab, this.hubContext(notice), {
